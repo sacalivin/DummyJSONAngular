@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: 'century gothic';
+   
+}
+
+.main-form-grid{
+    @apply grid gap-y-2 gap-x-2 md:gap-x-12 grid-cols-1 md:grid-cols-2;
+}
+.form-title{
+    @apply  font-bold flex text-xl md:text-4xl justify-center mb-5 text-center;
+}
+
+
+.form-subtitle{
+    @apply   flex text-sm  md:w-1/2   mb-5 text-center;
+}
+
+.submit-btn{
+    @apply  text-white font-semibold bg-primary hover:bg-primary/60 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-xl w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 max-w-xs transition-all duration-300 ease-in;
+}
+.cancel-btn{
+    @apply text-white bg-secondary hover:bg-secondary/80 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-xl w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 max-w-xs  transition-all duration-300 ease-in;;
+}
+.disabled-input{
+    @apply bg-gray-100 border border-primary text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600;
+}
+
+.default-input{
+    @apply bg-white border border-secondary   dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-gray-900 text-sm  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600;
+}
+.default-input-large-fonts{
+    @apply bg-white border border-secondary   dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-gray-900 sm:text-sm md:text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 md:p-2.5 dark:bg-gray-700 dark:border-gray-600;
+}
+.error-input{
+    @apply bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400;
+}
+.required-field{
+    @apply after:content-['_*'] after:text-red-700  text-sm;
+}
+#block mb-2 text-sm font-bold text-gray-900 dark:text-white
+.banner{
+    //background-image: url("/../assets/images/bgcik.jpg");
+    background-size: cover;
+    //background-repeat: no-repeat;
+    background-position: center;
+    //background-color: aqua;
+}

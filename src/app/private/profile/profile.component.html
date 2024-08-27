@@ -1,0 +1,255 @@
+@if(profileService$ | async ; as profile ){
+<div class="relative px-5 bg-white">
+  <h1 class="form-title">Update Your Profile</h1>
+  
+  <div class="bg-white py-5">
+    <ng-container>
+      <form [formGroup]="profileFormGroup" (ngSubmit)="submit()">
+        <div class="grid gap-3 mb-6">
+          <div class="main-form-grid">
+            <!-- First Name -->
+            <div>
+              <label
+                for="firstName"
+                class="block mb-2 text-sm font-bold text-gray-900 dark:text-white required-field"
+                >First Name</label
+              >
+              <input
+                type="text"
+                formControlName="firstName"
+                id="firstName"
+                class="default-input dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+              />
+              @if ( firstName?.touched && firstName?.invalid ) {
+              <div>
+                @if(firstName?.errors?.['required'] != null){
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  First name required!
+                </p>
+                } @else if (firstName?.errors?.['pattern'] != null) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Invalid first name!
+                </p>
+                }
+              </div>
+              }
+            </div>
+
+            <!-- middle name -->
+            <div class="md:col-start-2">
+              <label
+                for="middleName"
+                class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                >Middle Name</label
+              >
+              <input
+                type="text"
+                formControlName="middleName"
+                id="middleName"
+                class="default-input dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+              />
+              @if (middleName?.touched && middleName?.invalid ) {
+              <div>
+                @if(middleName?.errors?.['required'] != null){
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Middle name required!
+                </p>
+                } @else if (middleName?.errors?.['pattern'] != null) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Invalid middle Name!
+                </p>
+                }
+              </div>
+              }
+            </div>
+
+            <!-- last name -->
+            <div class="col-start-1">
+              <label
+                for="lastName"
+                class="block mb-2 text-sm font-bold text-gray-900 dark:text-white required-field"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                formControlName="lastName"
+                id="lastName"
+                class="default-input dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+              />
+              @if ( profileFormGroup.get('lastName')?.touched &&
+              profileFormGroup.get('lastName')?.invalid ) {
+              <div>
+                @if(lastName?.errors?.['required'] != null){
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Last name required!
+                </p>
+                } @else if (lastName?.errors?.['pattern'] != null) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Invalid Last name!
+                </p>
+                }
+              </div>
+              }
+            </div>
+
+            <!-- gender -->
+            <div class="md:col-start-2 md:row-start- col-start-auto">
+              <label
+                for="gender"
+                class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                >Gender
+              
+              <select
+                formControlName="gender"
+                [ngClass]="
+                  profileFormGroup.get('gender')?.touched &&
+                  profileFormGroup.get('gender')?.invalid
+                    ? errorInputClass
+                    : defaultInputClass
+                "
+                class="default-input"
+              >
+                <option selected disabled>---Select your gender---</option>
+
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select></label>
+              @if ( profileFormGroup.get('gender')?.touched &&
+              profileFormGroup.get('gender')?.invalid ) {
+              <div>
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Please select Document Type
+                </p>
+              </div>
+              }
+            </div>
+        
+            <!-- cell phone -->
+            <div class="md:row-start-3">
+              <label
+                for="cellPhoneNumber"
+                class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                >Cell Phone Number</label
+              >
+              <input
+                type="tel"
+                formControlName="cellPhoneNumber"
+                id="cellPhoneNumber"
+                class="default-input dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="07xxxxxxxx"
+              />
+              @if ( profileFormGroup.get('cellPhoneNumber') ?.touched &&
+              profileFormGroup.get('cellPhoneNumber')?.invalid ) {
+              <div>
+                @if(cellPhoneNumber?.errors?.['pattern'] != null){
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Invalid phone number!
+                </p>
+                }@else if (cellPhoneNumber?.errors?.['required'] != null) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Cell phone number required!
+                </p>
+                }
+              </div>
+              }
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3 col-start-1 md:row-start-4">
+              <label
+                for="email"
+                class="block mb-2 text-sm font-bold text-gray-900 dark:text-white required-field"
+                >Email Addresss</label
+              >
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                readonly
+                [value]="profile.email"
+                appEmailConfirmationValidation="verifyEmail"
+                [ngClass]="
+                  profileFormGroup.get('email')?.touched &&
+                  profileFormGroup.get('email')?.invalid
+                    ? errorInputClass
+                    : defaultInputClass
+                "
+                class="default-input dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="name@example.com"
+                
+              />
+              @if ( profileFormGroup.get('email')?.touched &&
+              profileFormGroup.get('email')?.invalid ) {
+              <div>
+                @if(email?.errors?.['pattern']) {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Invalid email!
+                </p>
+                }@else {
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                  Email required!
+                </p>
+                }
+              </div>
+              }
+            </div>
+            
+            <div class="md:row-start-6 md:col-start-1">
+              <!-- Upload Document  -->
+              <div>
+                <h3 class="text-sm font-bold">
+                  Upload your national ID
+                </h3>
+                <p class="text-sm">
+                  Using your phone take a picture of your National ID (Front
+                  side of the ID).
+                </p>
+                <div>
+                  <label
+                    for="idDocument"
+                    class="block mb-2 text-sm font-bold text-gray-900 dark:text-white"
+                  ></label>
+                  <input
+                    class="block w-full mb-1 text-xs text-secondary border border-dashed border-red-800 rounded-lg- cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    id="small_size2"
+                    (change)="onFileSelected($event)"
+                    type="file"
+                    placeholder="' '"
+                  />
+                  @if ( profileFormGroup.get('idDocument')?.touched &&
+                  profileFormGroup.get('idDocument')?.invalid ) {
+                  <div>
+                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                      Document required!
+                    </p>
+                  </div>
+                  }
+                </div>
+              </div>
+              <!-- Document preview -->
+              @if(idDocumentPreview != ''){
+              <div class="w-36 h-32 row-start-5">
+                <img [src]="idDocumentPreview" class="bg-secondary" alt="" />
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+       
+        <div class="flex gap-10 mt-8 justify-center">
+          <button type="submit" class="submit-btn">Update</button>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+</div>
+
+}@else {
+
+<p>Loading...</p>
+
+}
